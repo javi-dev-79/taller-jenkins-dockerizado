@@ -1,0 +1,6 @@
+reports/
+build/
+*.o
+
+datos_usuario.txt
+is-armstrong-number.zip
