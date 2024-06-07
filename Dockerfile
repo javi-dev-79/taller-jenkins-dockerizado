@@ -10,7 +10,7 @@ USER root
 # Instala sudo y otras dependencias
 RUN apt-get update && \
     apt-get install -y sudo && \
-    sudo apt-get install -y doxygen dot2tex graphviz
+    sudo apt-get install -y doxygen dot2tex graphviz cppcheck
 
 # Crea el directorio jenkins_home y establece los permisos adecuados
 RUN mkdir -p /var/jenkins_home && \

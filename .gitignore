@@ -2,5 +2,8 @@ reports/
 build/
 *.o
 
+html
+latex
+
 datos_usuario.txt
 is-armstrong-number.zip
