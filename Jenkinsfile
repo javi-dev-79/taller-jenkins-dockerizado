@@ -21,8 +21,6 @@ pipeline {
             steps {
                 sh '''
                 ls -l
-                cd taller-jenkins-dockerizado
-                ls -l
                 cd reports
                 ls -l
                 '''
