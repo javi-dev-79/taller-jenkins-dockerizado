@@ -2,7 +2,7 @@
 
 docker exec -it -u root new_jenkins /bin/bash -c '
 apt-get update
-apt-get install -y doxygen dot2tex graphviz git
+apt-get install -y doxygen dot2tex graphviz git nano vim
 git clone https://github.com/javi-dev-79/taller-jenkins-dockerizado.git /taller-jenkins-dockerizado
 chown -R jenkins:jenkins /taller-jenkins-dockerizado
 chmod -R 777 /taller-jenkins-dockerizado

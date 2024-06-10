@@ -17,15 +17,15 @@ pipeline {
                 sh 'zip documentation.zip -r html/*'
             }
         }
-        stage('Verificar y crear directorios necesarios') {
-            steps {
-                sh '''
-                ls -l
-                cd reports
-                ls -l
-                '''
-            }
-        }
+        // stage('Verificar y crear directorios necesarios') {
+        //     steps {
+        //         sh '''
+        //         ls -l
+        //         cd reports
+        //         ls -l
+        //         '''
+        //     }
+        // }
 	    stage('Análisis estático') {
             steps {
                 sh 'make cppcheck-xml'
