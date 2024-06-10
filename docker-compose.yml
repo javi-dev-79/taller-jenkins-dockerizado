@@ -9,8 +9,12 @@ services:
     environment:
       - JENKINS_OPTS="--httpPort=9080"
     restart: always
-    volumes:
-      - jenkins_home:/var/jenkins_home
+    # command: /usr/local/bin/dependencies.sh
+#     volumes:
+#       - jenkins_home:/var/jenkins_home
 
-volumes:
-  jenkins_home:
+# volumes:
+#   jenkins_home:
+
+
+

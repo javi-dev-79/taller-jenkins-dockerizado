@@ -17,7 +17,16 @@ pipeline {
                 sh 'zip documentation.zip -r html/*'
             }
         }
-	stage('Análisis estático') {
+        stage('Verificar y crear directorios necesarios') {
+            steps {
+                sh '''
+                echo "Verificando directorio reports/cppcheck/"
+                mkdir -p reports/cppcheck/
+                ls -l reports/
+                '''
+            }
+        }
+	    stage('Análisis estático') {
             steps {
                 sh 'make cppcheck-xml'
                 recordIssues enabledForFailure: true, failOnError: true, qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
