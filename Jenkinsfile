@@ -20,9 +20,11 @@ pipeline {
         stage('Verificar y crear directorios necesarios') {
             steps {
                 sh '''
-                echo "Verificando directorio reports/cppcheck/"
-                mkdir -p reports/cppcheck/
-                ls -l reports/
+                ls -l
+                cd taller-jenkins-dockerizado
+                ls -l
+                cd reports
+                ls -l
                 '''
             }
         }
