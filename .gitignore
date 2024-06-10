@@ -6,3 +6,6 @@ latex
 
 datos_usuario.txt
 is-armstrong-number.zip
+
+dependencies.sh
+entrypoint.sh

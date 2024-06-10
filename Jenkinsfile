@@ -17,10 +17,13 @@ pipeline {
                 sh 'zip documentation.zip -r html/*'
             }
         }
-	stage('Análisis estático') {
+	    stage('Análisis estático') {
             steps {
                 sh 'make cppcheck-xml'
-                recordIssues enabledForFailure: true, failOnError: true, qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
+                // recordIssues enabledForFailure: true, failOnError: true, qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
+                recordIssues qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
+                // recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [cppCheck(pattern: 'reports/cppcheck/*.html')]
+
             }
         }
     }
