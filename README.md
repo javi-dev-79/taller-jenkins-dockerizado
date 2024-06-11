@@ -142,15 +142,17 @@ Follow these steps to install the required dependencies inside the Jenkins Docke
 
 The Jenkins pipeline executed the following tasks:
 
-1. Repository Cloning: The pipeline clones the specified repository in the Jenkins file.
+1. Starting the build from the remote repository: The flow begins by obtaining the Jenkinsfile from a remote repository, in this case, from https://github.com/javi-dev-79/taller-jenkins-dockerizado.git.
 
-2. Documentation generation: Using Doxygen, the channel generates documentation for the project.
+2. Project construction: The construction of the project is executed, which includes several stages such as obtaining the repository, generating documentation, static analysis and executing unit tests.
 
-3. Documentation archiving: the generated documentation is archived in a ZIP file called documentation.zip.
+3. Documentation generation: The doxygen command is executed to generate the project documentation. The documentation is then compressed into a documentation.zip file.
 
-4. Static analysis: The pipeline performs static code analysis using cppcheck, which identifies problems in the code.
+4. Static analysis with CPPCheck: Static analysis of the code is performed using CPPCheck. 6 problems are identified in the code and reports are generated in XML format.
 
-5. Quality gate evaluation: The quality gates defined in the Jenkins file have been evaluated and the result will be displayed, based on the number of files detected.
+5. Execution of unit tests: The unit test code is compiled and the resulting binary is executed. Tests are executed using CMocka and reports are generated in XML format.
+
+6. Logging results: The results of static analysis and unit tests are logged in Jenkins.
 
 This exercise demonstrates automating repository management, documentation generation, and code analysis using Jenkins and tools such as Doxygen and cppcheck.
 
