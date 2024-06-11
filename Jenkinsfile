@@ -4,33 +4,39 @@ pipeline {
     stages {
         stage('Obtener el repositorio') {
             steps {
-                git branch: 'main', url: 'https://github.com/javi-dev-79/taller-jenkins.git'
+                git branch: 'main', url: 'https://github.com/alfonsoalba-cursos/openwebinars-curso-de-jenkins.git'
             }
         }
-        stage('Construir la documentación') {
+        stage('Construir la documetación') {
             steps {
-                sh 'doxygen'
+                sh "doxygen"
             }
+
         }
+
         stage('Archivar la documentación') {
             steps {
-                sh 'zip documentation.zip -r html/*'
+                sh "zip documentation.zip -r html/*"
             }
         }
-	    stage('Análisis estático') {
+
+        stage('Análisis estático') {
             steps {
                 sh 'make cppcheck-xml'
-                // recordIssues enabledForFailure: true, failOnError: true, qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
-                recordIssues qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
-                // recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [cppCheck(pattern: 'reports/cppcheck/*.html')]
-
+                recordIssues enabledForFailure: true, failOnError: true, qualityGates: [[threshold: 1, type: 'TOTAL', unstable: false]], tools: [cppCheck(pattern: 'reports/cppcheck/*.xml')]
+            }
+        }
+        stage('Tests unitarios') {
+            steps {
+                sh 'make tests-xml'
+                junit 'reports/cmocka/*.xml'
             }
         }
     }
     post {
         success {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'html/', reportFiles: 'html/', reportName: 'Documentación', reportTitles: ''])
-            archiveArtifacts artifacts: 'documentation.zip', allowEmptyArchive: true
+            archive "documentation.zip"
         }
     }
 }
